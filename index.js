@@ -23,7 +23,7 @@ function countNumerics(s) {
   return count;
 }
 var predict = [];
-var user = "";
+var isFake;
 
 app.post("/", async function(req, res) {
   var username = req.body.firstName;
@@ -59,8 +59,8 @@ app.post("/", async function(req, res) {
   predict.push(parseInt(following));
   let output = await testFunc(predict);
   if (output.dense_14.data[0] > output.dense_14.data[1])
-    res.json({ isFake: true });
-  else res.json({ isFake: false });
+    isFake = true;
+  else isFake = false;
 
 });
 
@@ -68,8 +68,12 @@ async function testFunc(predict) {
   let output = await testList(predict);
   console.log("in index");
   console.log(output);
+  return output;
 }
 
+app.get("/submit", (req, res)=> {
+  res.send(isFake);
+});
 app.listen(3000, function () {
   console.log("Started at 3000");
 }); 

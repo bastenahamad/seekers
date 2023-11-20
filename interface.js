@@ -16,8 +16,8 @@ async function testFunc()
 {
   const maxList = [0, 0.44, 1, 0.43, 0, 0, 0, 1, 0, 5, 17];
   let output = await testList(maxList);
-  console.log("in interface");
-  console.log(output)
+  // console.log("in interface");
+  // console.log(output)
 }
 testFunc();
 module.exports = { testList };
